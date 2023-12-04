@@ -43,10 +43,10 @@ class _HomePageState extends State<HomePage> {
             Map<dynamic, dynamic>? data = snapshot.data!.snapshot.value as Map<dynamic, dynamic>?;
 
             bool? isRoomAvailable = data?['RoomAvailability'] as bool?;
-            bool? isRoomRented = data?['RoomRented'] as bool?;
+            int? isRoomRented = data?['RoomRented'] as int?;
 
             // Check if the room is available
-            if (isRoomAvailable == true && isRoomRented != true)  {
+            if (isRoomAvailable == true && isRoomRented == 0)  {
               // Display the list tile when the room is available
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
