@@ -27,29 +27,40 @@ class AuthPage extends StatelessWidget {
             style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
           ),
           StreamBuilder(
-              stream: dbr.child('authStatus').onValue,
+              stream: dbr.child('AuthStatus').onValue,
               builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
                 if (snapshot.hasData) {
                   // Assuming authStatus is a boolean
-                  bool? authStatus = snapshot.data!.snapshot.value as bool?;
+                  int AuthStatus = snapshot.data!.snapshot.value as int;
 
-                  if (authStatus == true) {
+                  if (AuthStatus == 1) {
                     // Navigate to another page if authStatus is true
+                    //dbr.child('AuthStatus').set(false);
+                    WidgetsBinding.instance?.addPostFrameCallback((_){
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => HomePage(),
                       ),
                     );
+                    }
+                    );
+                    return Container();
                   }
-                  else {
+                  else if (AuthStatus == 0){
+                  dbr.child('AuthStatus').set(2);
+
+                  Future.delayed(Duration.zero, (){
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => InvalidCardPage(),
-                      )
+                      MaterialPageRoute(
+                        builder: (context) => InvalidCardPage(),
+                      ),
                     );
+                    return Container();
                   }
-                  // You can add an else block if you want to handle false case
+                  );
+                  }
                 }
               return SizedBox.shrink();
               },
