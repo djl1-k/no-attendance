@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                                 actions: [
                                   TextButton(
                                     onPressed: () async {
-                                      await dbr.child('RoomRented').set(true);
+                                      await dbr.child('RoomRented').set(1);
                                       await dbr.child('RoomAvailability').set(false);
                     
                                       Navigator.of(context).pop(); // Close the dialog
