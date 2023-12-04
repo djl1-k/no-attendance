@@ -36,14 +36,17 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.blue,
       ),
       body: StreamBuilder(
-        stream: dbr.child('RoomAvailability').onValue, 
+        stream: dbr.onValue, 
         builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
            if (snapshot.hasData && snapshot.data != null) {
       // Assuming that the 'RoomAvailability' data is boolean
-            bool? isRoomAvailable = snapshot.data!.snapshot.value as bool?;
+            Map<dynamic, dynamic>? data = snapshot.data!.snapshot.value as Map<dynamic, dynamic>?;
+
+            bool? isRoomAvailable = data?['RoomAvailability'] as bool?;
+            bool? isRoomRented = data?['RoomRented'] as bool?;
 
             // Check if the room is available
-            if (isRoomAvailable == true && dbr.child('RoomRented') != true)  {
+            if (isRoomAvailable == true && isRoomRented != true)  {
               // Display the list tile when the room is available
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
