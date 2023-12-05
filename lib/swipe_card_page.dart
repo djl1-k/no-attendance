@@ -30,12 +30,11 @@ class AuthPage extends StatelessWidget {
               stream: dbr.child('AuthStatus').onValue,
               builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
                 if (snapshot.hasData) {
-                  // Assuming authStatus is a boolean
+                  // Assuming authStatus is an int
                   int AuthStatus = snapshot.data!.snapshot.value as int;
 
                   if (AuthStatus == 1) {
-                    // Navigate to another page if authStatus is true
-                    //dbr.child('AuthStatus').set(false);
+                    
                     WidgetsBinding.instance?.addPostFrameCallback((_){
                     Navigator.pushReplacement(
                       context,

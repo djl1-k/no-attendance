@@ -21,14 +21,14 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
 
-    // Future.delayed(Duration(minutes: 3), () {
-    //   // Navigate to another page using Navigator
-    //   Navigator.of(context).pushReplacement(
-    //     MaterialPageRoute(
-    //       builder: (context) => AuthPage(), // Replace YourOtherPage with the actual page you want to navigate to
-    //     ),
-    //   );
-    // });
+    Future.delayed(Duration(minutes: 1), () {
+      // Navigate to another page using Navigator
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => AuthPage(), // Replace YourOtherPage with the actual page you want to navigate to
+        ),
+      );
+    });
     
     return Scaffold(
       appBar: AppBar(
@@ -76,8 +76,8 @@ class _HomePageState extends State<HomePage> {
                                 actions: [
                                   TextButton(
                                     onPressed: () async {
-                                      await dbr.child('RoomRented').set(1);
-                                      await dbr.child('RoomAvailability').set(false);
+                                        await dbr.child('RoomRented').set(1);
+                                        await dbr.child('RoomAvailability').set(false);
                     
                                       Navigator.of(context).pop(); // Close the dialog
                                       Navigator.of(context).pushReplacement(
