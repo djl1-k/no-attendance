@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
-import 'dart:html';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
