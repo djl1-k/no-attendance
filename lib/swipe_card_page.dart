@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -13,9 +12,11 @@ class AuthPage extends StatelessWidget {
   AuthPage({super.key});
 
   final dbr = FirebaseDatabase.instance.ref();
+  
 
   @override
   Widget build(BuildContext context) {
+
 
     return Scaffold(
       body: Center(

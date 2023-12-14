@@ -1,6 +1,5 @@
-// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously, prefer_const_literals_to_create_immutables
 
-import 'dart:html';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
 
-    Future.delayed(Duration(minutes: 1), () {
+    Future.delayed(Duration(seconds: 30), () {
       // Navigate to another page using Navigator
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
@@ -39,7 +38,7 @@ class _HomePageState extends State<HomePage> {
         stream: dbr.onValue, 
         builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
            if (snapshot.hasData && snapshot.data != null) {
-      // Assuming that the 'RoomAvailability' data is boolean
+
             Map<dynamic, dynamic>? data = snapshot.data!.snapshot.value as Map<dynamic, dynamic>?;
 
             bool? isRoomAvailable = data?['RoomAvailability'] as bool?;
@@ -50,21 +49,8 @@ class _HomePageState extends State<HomePage> {
               // Display the list tile when the room is available
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.amber,
-                      border: Border.all(
-                      color: Colors.grey, // Set the border color
-                      width: 1.0, // Set the border width
-                      ),
-                      borderRadius: BorderRadius.circular(20)
-                    ),
-                    
-                    child: ListTile(
-                      contentPadding: EdgeInsets.all(16.0), // Add padding as needed
-                      title: Text('Room 401'),
-                      trailing: ElevatedButton(
-                        onPressed: () {
+                  child: GestureDetector(
+                    onTap: () {
                           // Open a dialog when the button is pressed
                           showDialog(
                             context: context,
@@ -99,8 +85,29 @@ class _HomePageState extends State<HomePage> {
                             },
                           );
                         },
-                        child: Text('Rent Room'),
-                      ),
+                    child: ListView(
+                      children: [Container(
+                        decoration: BoxDecoration(
+                          color: Colors.blue[300],
+                          border: Border.all(
+                          color: Colors.grey, // Set the border color
+                          width: 1.0, // Set the border width
+                          ),
+                          borderRadius: BorderRadius.circular(20)
+                        ),
+                        
+                        child: ListTile(
+                          contentPadding: EdgeInsets.all(16.0), // Add padding as needed
+                          title: Text('Room 401'),
+                          subtitle: Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [Text("Available from 1:00 - 3:30", style: TextStyle(fontSize: 17),)],
+                              ),
+                          )
+                        ),
+                      ),]
                     ),
                   ),
                 );
