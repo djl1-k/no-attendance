@@ -21,10 +21,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
 
     Future.delayed(Duration(seconds: 30), () {
-      // Navigate to another page using Navigator
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => AuthPage(), // Replace YourOtherPage with the actual page you want to navigate to
+          builder: (context) => AuthPage(), // Navigate to auth page after 30 seconds
         ),
       );
     });
@@ -68,14 +67,13 @@ class _HomePageState extends State<HomePage> {
                                       Navigator.of(context).pop(); // Close the dialog
                                       Navigator.of(context).pushReplacement(
                                         MaterialPageRoute(
-                                          builder: (context) => RentSuccessPage(), // Replace YourOtherPage with the actual page you want to navigate to
+                                          builder: (context) => RentSuccessPage(), // Navigate to rent success page
                                         ),);
                                     },
                                     child: Text('Yes'),
                                   ),
                                   TextButton(
                                     onPressed: () {
-                                      // Add your logic when the user cancels
                                       Navigator.of(context).pop(); // Close the dialog
                                     },
                                     child: Text('No'),
@@ -90,14 +88,14 @@ class _HomePageState extends State<HomePage> {
                         decoration: BoxDecoration(
                           color: Colors.blue[300],
                           border: Border.all(
-                          color: Colors.grey, // Set the border color
-                          width: 1.0, // Set the border width
+                          color: Colors.grey, 
+                          width: 1.0, 
                           ),
                           borderRadius: BorderRadius.circular(20)
                         ),
                         
                         child: ListTile(
-                          contentPadding: EdgeInsets.all(16.0), // Add padding as needed
+                          contentPadding: EdgeInsets.all(16.0), 
                           title: Text('Room 401'),
                           subtitle: Padding(
                             padding: const EdgeInsets.only(top: 8.0),
@@ -112,7 +110,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                 );
             } else {
-              // Display an alternative widget when the room is not available
               return Center(
                 child: Text(
                   'There are no rooms available at this moment.',
@@ -124,10 +121,8 @@ class _HomePageState extends State<HomePage> {
               );
             }
           } else if (snapshot.hasError) {
-            // Handle the error case if necessary
             return Text('Error: ${snapshot.error}');
           } else {
-            // Display a loading indicator or any other widget while data is being fetched
             return CircularProgressIndicator();
           }
         }),

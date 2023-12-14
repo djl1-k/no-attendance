@@ -10,10 +10,9 @@ class RentSuccessPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     Future.delayed(Duration(seconds: 3), () {
-      // Navigate to another page using Navigator
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => AuthPage(), // Replace YourOtherPage with the actual page you want to navigate to
+          builder: (context) => AuthPage(), // navigate to auth page after 3 seconds
         ),
       );
     });
